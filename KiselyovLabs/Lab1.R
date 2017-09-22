@@ -11,7 +11,7 @@ irisMean = function(name) {
 irisMeans = t(sapply(irisNames, irisMean))
 
 #count distances
-dist = function(p1, p2)(p1[1] - p2[1]) ^ 2 + (p1[2] - p2[2]) ^ 2
+dist = function(p1, p2) sqrt(sum((p1 - p2) ^ 2))
 irisDist = apply(irisMeans, 1, dist, u)
 
 #print closest group of flowers to point u
