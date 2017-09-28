@@ -9,7 +9,7 @@ dist = function(p1, p2) sqrt(sum((p1 - p2) ^ 2))
 
 closestGroup = function(u) {
     irisDist = apply(petals, 1, dist, u)
-    minIndex = which.min(irisDist)
+    minIndex = max(which(irisDist == min(irisDist))) #last index, because there are equal dots in irises (lst dots are drawn on plot)
     name = iris[minIndex, 5]
     return (name)
 }
