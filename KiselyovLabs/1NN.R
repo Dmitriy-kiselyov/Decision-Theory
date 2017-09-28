@@ -1,10 +1,4 @@
-irisNames = c("setosa", "versicolor", "virginica")
-
-#count distances
-
 #help fields and functions
-petals = iris[, 3:4]
-
 dist = function(p1, p2) sqrt(sum((p1 - p2) ^ 2))
 
 closestGroup = function(u) {
@@ -14,16 +8,26 @@ closestGroup = function(u) {
     return (name)
 }
 
+#init global values
+irisNames = c("setosa", "versicolor", "virginica")
+petals = iris[, 3:4]
+xlim = c(1, 7)
+ylim = c(-1, 3)
+#petals = iris[, 1:2]
+#xlim = c(4, 8)
+#ylim = c(1.5, 4.5)
+step = 0.1
+
 #draw plot
 irisColors = c("red", "green3", "blue")
 names(irisColors) = irisNames
 
-plot(iris[, 3:4], bg = irisColors[iris$Species], pch = 21, asp = 1) #iris
+plot(petals, bg = irisColors[iris$Species], pch = 21, asp = 1, xlim = xlim, ylim = ylim) #iris
 #legend("bottomright", irisNames, pch = 21, pt.bg = irisColors)
 
 #main method
-for (x in seq(1, 7, 0.1)) {
-    for (y in seq(-1, 3, 0.1)) {
+for (x in seq(xlim[1], xlim[2], step)) {
+    for (y in seq(ylim[1], ylim[2], step)) {
         u = c(x, y)
         groupName = closestGroup(u)
         #draw new point

@@ -1,10 +1,4 @@
-irisNames = c("setosa", "versicolor", "virginica")
-
-#count distances
-
 #help fields and functions
-petals = iris[, 3:4]
-
 dist = function(p1, p2) sqrt(sum((p1 - p2) ^ 2))
 
 #KNN method
@@ -16,17 +10,27 @@ closestGroup = function(u, k) {
     return(names(bestGroup))
 }
 
+#init global values
+irisNames = c("setosa", "versicolor", "virginica")
+petals = iris[, 3:4]
+xlim = c(1, 7)
+ylim = c(-1, 3)
+#petals = iris[, 1:2]
+#xlim = c(4, 8)
+#ylim = c(1.5, 4.5)
+step = 0.1
+k = 10
+
 #draw plot
 irisColors = c("red", "green3", "blue")
 names(irisColors) = irisNames
 
-plot(petals, bg = irisColors[iris$Species], pch = 21, asp = 1, xlim = c(1, 7), ylim = c(-1, 3)) #iris
+plot(petals, bg = irisColors[iris$Species], pch = 21, asp = 1, xlim = xlim, ylim = ylim) #iris
 #legend("bottomright", irisNames, pch = 21, pt.bg = irisColors)
 
 #main method
-k = 10
-for (x in seq(1, 7, 0.1)) {
-    for (y in seq(-1, 3, 0.1)) {
+for (x in seq(xlim[1], xlim[2], step)) {
+    for (y in seq(ylim[1], ylim[2], step)) {
         u = c(round(x, 1), round(y, 1)) #use round to aviod cases 0.1 + 0.2 = 0.3000000004
         if (any(apply(petals, 1, function(v) all(v == u)))) next
         #if trainig set contains u (O(n) - too long)
