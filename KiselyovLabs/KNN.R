@@ -13,7 +13,7 @@ mc.KNN = function(sortedDistances, k) {
 #LOO
 mc.LOO.KNN = function(points, classes) {
     n = dim(points)[1]
-    looY = rep(0, n)
+    looY = rep(0, n-1) #n-1 because one element in sample always missing
 
     for (i in 1:n) {
         u = points[i,]
@@ -23,7 +23,7 @@ mc.LOO.KNN = function(points, classes) {
         names(distances) = classes[-i]
         sortedDistances = sort(distances)
 
-        for (k in 1:n) {
+        for (k in 1:n-1) {
             bestClass = mc.KNN(sortedDistances, k)
             looY[k] = looY[k] + ifelse(bestClass == classes[i], 0, 1)
         }
