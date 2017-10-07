@@ -1,6 +1,5 @@
-#help fields and functions
-mc.euclideanDistance = function(p1, p2) sqrt(sum((p1 - p2) ^ 2))
-mc.getDistances = function(points, u, distFunction) apply(points, 1, distFunction, u)
+#help functions
+source("metricHelp.R")
 
 #KNN
 mc.KwKNN.w = function(i, k) return((k + 1 - i) / k)
@@ -85,5 +84,5 @@ main = function() {
     #draw
     par(mfrow = c(1, 2))
     k.opt = mc.draw.LOO.KwKNN(petals, petalNames)
-    mc.draw.KwKNN(petals, petalNames, colors = c("red", "green3", "blue"), k = k.opt, xlim = c(1, 7), ylim = c(-1, 3), step = 0.1)
+    mc.draw.KwKNN(petals, petalNames, colors = c("red", "green3", "blue"), k = k.opt, xlim = plot.limits(petals[, 1], 0.2), ylim = plot.limits(petals[, 2], 0.2), step = 0.1)
 }
