@@ -31,7 +31,7 @@ mc.LOO.KwKNN = function(points, classes) {
         names(distances) = classes[-i]
         sortedDistances = sort(distances)
 
-        for (k in 1:n-1) {
+        for (k in 1:n - 1) {
             bestClass = mc.KwKNN(sortedDistances, k)
             looY[k] = looY[k] + ifelse(bestClass == classes[i], 0, 1)
         }

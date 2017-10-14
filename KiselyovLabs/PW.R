@@ -1,20 +1,16 @@
 #help functions
 source("metricHelp.R")
+source("kernelHelp.R")
 
-#CORE
-mc.PW.core.R = function(dist) {
-    dist[dist < -1] = 0
-    dist[dist > 1] = 0
-    dist[dist != 0] = 0.5
-    return(dist)
-}
+#KERNEL
+mc.PW.kernel = mc.kernel.Q #use this kernel
 
 #PW
-mc.PW = function(points, classes, u, h, core) {
+mc.PW = function(points, classes, u, h) {
     dist = mc.getDistances(points, u, mc.euclideanDistance)
     names(dist) = classes
     dist = dist / h
-    dist = core(dist)
+    dist = mc.PW.kernel(dist)
 
     sumByName = function(name, arr) sum(arr[names(arr) == name])
     classes = unique(classes)
@@ -35,7 +31,7 @@ mc.LOO.PW = function(points, classes, hLimits) {
 
         for (j in 1:length(hLimits)) {
             h = hLimits[j]
-            bestClass = mc.PW(teachSample, classes[-i], u, h, mc.PW.core.R)
+            bestClass = mc.PW(teachSample, classes[-i], u, h)
             looY[j] = looY[j] + ifelse(bestClass == classes[i], 0, 1)
         }
     }
@@ -72,7 +68,7 @@ mc.draw.PW = function(points, classes, colors, h, xlim, ylim, step) {
             u = c(round(x, 1), round(y, 1)) #use round to aviod cases 0.1 + 0.2 = 0.3000000004
             if (any(apply(points, 1, function(v) all(v == u)))) next #do not classify known points
 
-            bestClass = mc.PW(points, classes, u, h, mc.PW.core.R)
+            bestClass = mc.PW(points, classes, u, h)
 
             #draw new point
             points(u[1], u[2], col = colors[bestClass], pch = 21) #u
