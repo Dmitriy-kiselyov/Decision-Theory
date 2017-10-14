@@ -15,6 +15,8 @@ mc.PW = function(distances, classes, u, h) {
     wei = sapply(classes, sumByName, distances)
     names(wei) = classes
 
+    if (max(wei) == 0) return("no")
+
     return(names(which.max(wei)))
 }
 
@@ -62,6 +64,9 @@ mc.draw.PW = function(points, classes, colors, h, xlim, ylim, step) {
     plot(points, bg = colors[classes], pch = 21, asp = 1, xlim = xlim, ylim = ylim, main = "Карта классификации по PW") #known data
     #legend("topright", legend = uniqueClasses, pch = 20, pt.bg = colors, xpd = T)
 
+    #add 'no' class
+    colors = c(colors, "no" = "yellow")
+
     #guess
     for (x in seq(xlim[1], xlim[2], step)) {
         for (y in seq(ylim[1], ylim[2], step)) {
@@ -85,6 +90,6 @@ main = function() {
 
     #draw
     par(mfrow = c(1, 2))
-    h.opt = mc.draw.LOO.PW(petals, petalNames, hLimits = seq(0.1, 1, 0.1))
+    h.opt = mc.draw.LOO.PW(petals, petalNames, hLimits = seq(0.1, 3, 0.1))
     mc.draw.PW(petals, petalNames, colors = c("red", "green3", "blue"), h = h.opt, xlim = plot.limits(petals[, 1], 0.2), ylim = plot.limits(petals[, 2], 0.2), step = 0.1)
 }
