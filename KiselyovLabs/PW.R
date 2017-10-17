@@ -90,6 +90,6 @@ main = function() {
 
     #draw
     par(mfrow = c(1, 2))
-    h.opt = mc.draw.LOO.PW(petals, petalNames, hLimits = seq(0.1, 3, 0.1))
+    h.opt = mc.draw.LOO.PW(petals, petalNames, hLimits = seq(0.1, 2, 0.05))
     mc.draw.PW(petals, petalNames, colors = c("red", "green3", "blue"), h = h.opt, xlim = plot.limits(petals[, 1], 0.2), ylim = plot.limits(petals[, 2], 0.2), step = 0.1)
 }
