@@ -3,7 +3,7 @@ source("help.R")
 source("kernelHelp.R")
 
 #KERNEL
-mc.PW.kernel = mc.kernel.Q #use this kernel
+mc.PW.kernel = NULL #use this kernel
 
 #PW
 mc.PW = function(distances, classes, u, h) {
@@ -44,18 +44,31 @@ mc.LOO.PW = function(points, classes, hLimits) {
 
 #DRAWINGS
 mc.draw.LOO.PW = function(points, classes, hLimits) {
-    time = system.time(looY <- mc.LOO.PW(points, classes, hLimits))
+    hs = NULL
+    loos = NULL
 
-    #draw
-    plot(hLimits, looY, type = "l", main = "LOO для PW", sub = time.format(time), font.sub = 3, cex.sub = 0.8, xlab = "h", ylab = "LOO")
+    for (kernelName in names(mc.kernels)) {
+        mc.PW.kernel <<- mc.kernels[[kernelName]] #set kernel
 
-    h.opt = hLimits[which.min(looY)]
-    loo.min = looY[which.min(looY)]
+        time = system.time(looY <- mc.LOO.PW(points, classes, hLimits))
 
-    points(h.opt, loo.min, pch = 19, col = "red")
-    text(h.opt, loo.min, labels = paste("h=", h.opt, ", Loo=", round(loo.min, 3), sep = ""), pos = 3, col = "red", family = "mono")
+        #draw
+        plot(hLimits, looY, type = "l", main = paste("LOO для PW (ядро: ", kernelName, ")", sep = ""), sub = time.format(time), font.sub = 3, cex.sub = 0.8, xlab = "h", ylab = "LOO")
 
-    return(h.opt) #for future use
+        h.opt = hLimits[which.min(looY)]
+        loo.min = looY[which.min(looY)]
+
+        points(h.opt, loo.min, pch = 19, col = "red")
+        text(h.opt, loo.min, labels = paste("h=", h.opt, ", Loo=", round(loo.min, 3), sep = ""), pos = 3, col = "red", family = "mono")
+
+        hs = c(hs, h.opt)
+        loos = c(loos, loo.min)
+    }
+
+    bestIndex = which.min(loos)
+    mc.PW.kernel = mc.kernels[bestIndex] #set best kernel as default
+
+    return(hs[bestIndex]) #for future use
 }
 
 mc.draw.PW = function(points, classes, colors, h, xlim, ylim, step) {
@@ -96,7 +109,8 @@ main = function() {
     petalNames = iris[, 5]
 
     #draw
-    par(mfrow = c(1, 2), xpd = NA)
+    par(xpd = NA)
+    layout(matrix(c(1, 2, 5, 5, 3, 4, 5, 5), 2, 4, byrow = T))
     h.opt = mc.draw.LOO.PW(petals, petalNames, hLimits = seq(0.1, 2, 0.05))
     mc.draw.PW(petals, petalNames, colors = c("red", "green3", "blue"), h = h.opt, xlim = plot.limits(petals[, 1], 0.2), ylim = plot.limits(petals[, 2], 0.2), step = 0.1)
 }

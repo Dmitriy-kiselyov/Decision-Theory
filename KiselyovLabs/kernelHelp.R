@@ -19,3 +19,6 @@ mc.kernel.Q = function(r) {
 mc.kernel.E = function(r) {
     (3 / 4) * (1 - r^2) * mc.kernel.indicator(r)
 }
+
+#ALL
+mc.kernels = list("R" = mc.kernel.R, "T" = mc.kernel.T, "Q" = mc.kernel.Q, "E" = mc.kernel.E)
