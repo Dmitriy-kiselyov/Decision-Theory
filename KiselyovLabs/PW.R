@@ -3,7 +3,7 @@ source("help.R")
 source("kernelHelp.R")
 
 #KERNEL
-mc.PW.kernel = mc.kernel.T #use this kernel
+mc.PW.kernel = mc.kernel.Q #use this kernel
 
 #PW
 mc.PW = function(distances, classes, u, h) {

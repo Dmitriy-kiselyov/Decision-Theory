@@ -1,23 +1,21 @@
+mc.kernel.indicator = function(r) +(abs(r) <= 1)
+
 #RECT
-mc.kernel.R = function(dist) {
-    dist[dist < -1] = 0
-    dist[dist > 1] = 0
-    dist[dist != 0] = 0.5
-    return(dist)
+mc.kernel.R = function(r) {
+    0.5 * mc.kernel.indicator(r)
 }
 
 #TRIANGLE
-mc.kernel.T = function(dist) {
-    dist[dist < -1] = 0
-    dist[dist > 1] = 0
-    dist[dist != 0] = -abs(dist[dist != 0]) + 1
-    return(dist)
+mc.kernel.T = function(r) {
+    (1 - abs(r)) * mc.kernel.indicator(r)
 }
 
-#QUADRATIC
-mc.kernel.Q = function(dist) {
-    dist[dist < -1] = 0
-    dist[dist > 1] = 0
-    dist[dist != 0] = -(dist[dist != 0] ^ 2) + 1
-    return(dist)
+#QUARTIC
+mc.kernel.Q = function(r) {
+    (15 / 16) * (1 - r^2)^2 * mc.kernel.indicator(r)
+}
+
+#EPANECH
+mc.kernel.E = function(r) {
+    (3 / 4) * (1 - r^2) * mc.kernel.indicator(r)
 }
