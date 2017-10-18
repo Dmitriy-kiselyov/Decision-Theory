@@ -2,7 +2,7 @@
 
 - [x] - [k ближайших соседей (KNN)](KiselyovLabs/readme/KNN.md)
 - [x] - [k взвешанных ближайших соседей (KwKNN)](KiselyovLabs/readme/KwKNN.md)
-- [ ] - метод парзеноского окна
+- [x] - [метод парзеноского окна](KiselyovLabs/readme/PW.md)
 - [ ] - метод потенциальных функций
 - [ ] - STOLP
 
