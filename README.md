@@ -1,8 +1,8 @@
 # Desicion Theory
 
-- [x] - [k ближайших соседей (KNN)](KiselyovLabs/readme/KNN.md)
-- [x] - [k взвешанных ближайших соседей (KwKNN)](KiselyovLabs/readme/KwKNN.md)
-- [x] - [метод парзеноского окна](KiselyovLabs/readme/PW.md)
-- [ ] - метод потенциальных функций
+- [x] - [k Р±Р»РёР¶Р°Р№С€РёС… СЃРѕСЃРµРґРµР№ (KNN)](KiselyovLabs/readme/KNN.md)
+- [x] - [k РІР·РІРµС€Р°РЅРЅС‹С… Р±Р»РёР¶Р°Р№С€РёС… СЃРѕСЃРµРґРµР№ (KwKNN)](KiselyovLabs/readme/KwKNN.md)
+- [x] - [РјРµС‚РѕРґ РїР°СЂР·РµРЅРѕСЃРєРѕРіРѕ РѕРєРЅР°](KiselyovLabs/readme/PW.md)
+- [ ] - РјРµС‚РѕРґ РїРѕС‚РµРЅС†РёР°Р»СЊРЅС‹С… С„СѓРЅРєС†РёР№
 - [ ] - STOLP
 
