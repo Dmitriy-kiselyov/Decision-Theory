@@ -44,7 +44,7 @@ mc.PF.potentials = function(points, classes, h, mistakes.limit, log = F) {
             u = points[i,]
             distances = mc.getDistances(points, u, mc.euclideanDistance)
 
-            if (mc.PF(distances, classes, potentials, 1) != classes[i]) {
+            if (mc.PF(distances, classes, potentials, h) != classes[i]) {
                 mistakes.made = mistakes.made + 1
                 if (!log && mistakes.made > mistakes.limit) break #save time
             }
