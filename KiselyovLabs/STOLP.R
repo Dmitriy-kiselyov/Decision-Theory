@@ -86,7 +86,7 @@ mc.draw.STOLP = function(points.etalones, classes.etalones, points.rest, classes
     uniqueClasses = unique(classes.etalones)
     names(colors) = uniqueClasses
 
-    plot(points.rest, col = colors[classes.rest], pch = 21, asp = 1, main = "STOLP для KNN")
+    plot(points.rest, col = colors[classes.rest], pch = 21, asp = 1, main = "STOLP РґР»СЏ KNN")
     points(points.etalones, bg = colors[classes.etalones], pch = 21)
 }
 
@@ -106,6 +106,6 @@ main = function() {
 
     par(mfrow = c(1, 2), xpd = NA)
     mc.draw.KNN(points.etalones, classes.etalones, c("red", "green3", "blue"), k = 6, xlim = xlim, ylim = ylim, step = 0.1, title = F)
-    title(main = "Карта классификации KNN на выборке отфильтрованной STOLP")
+    title(main = "РљР°СЂС‚Р° РєР»Р°СЃСЃРёС„РёРєР°С†РёРё KNN РЅР° РІС‹Р±РѕСЂРєРµ РѕС‚С„РёР»СЊС‚СЂРѕРІР°РЅРЅРѕР№ STOLP")
     mc.draw.KNN(points, classes, c("red", "green3", "blue"), k = 6, xlim = xlim, ylim = ylim, step = 0.1)
 }

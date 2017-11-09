@@ -118,3 +118,5 @@ mistakes.limit, log = F)` получает на вход известные об
 
 [Вернуться к PW](PW.md)
 
+[Перейти к STOLP](STOLP.md)
+

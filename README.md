@@ -4,5 +4,5 @@
 - [x] - [k взвешанных ближайших соседей (KwKNN)](KiselyovLabs/readme/KwKNN.md)
 - [x] - [метод парзеноского окна](KiselyovLabs/readme/PW.md)
 - [x] - [метод потенциальных функций](KiselyovLabs/readme/PF.md)
-- [ ] - STOLP
+- [x] - [STOLP](KiselyovLabs/readme/STOLP.md)
 
