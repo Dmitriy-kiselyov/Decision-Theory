@@ -37,7 +37,7 @@ mc.draw.LOO.KNN = function(points, classes) {
     time = system.time(looY <- mc.LOO.KNN(points, classes))
 
     #draw
-    plot(1:length(looY), looY, type = "l", main = "LOO äëÿ KNN", sub = time.format(time), font.sub = 3, cex.sub = 0.8, xlab = "K", ylab = "LOO")
+    plot(1:length(looY), looY, type = "l", main = "LOO Ð´Ð»Ñ KNN", sub = time.format(time), font.sub = 3, cex.sub = 0.8, xlab = "K", ylab = "LOO")
     k.opt = which.min(looY)
     points(k.opt, looY[k.opt], pch = 19, col = "red")
     text(k.opt, looY[k.opt], labels = paste("K=", k.opt, ", Loo=", round(looY[k.opt], 3), sep = ""), pos = 3, col = "red", family = "mono")
@@ -45,10 +45,11 @@ mc.draw.LOO.KNN = function(points, classes) {
     return(k.opt) #for future use
 }
 
-mc.draw.KNN = function(points, classes, colors, k, xlim, ylim, step) {
+mc.draw.KNN = function(points, classes, colors, k, xlim, ylim, step, title = T) {
     uniqueClasses = unique(classes)
     names(colors) = uniqueClasses
-    plot(points, bg = colors[classes], pch = 21, asp = 1, xlim = xlim, ylim = ylim, main = "Êàðòà êëàññèôèêàöèè ïî KNN") #known data
+    plot(points, bg = colors[classes], pch = 21, asp = 1, xlim = xlim, ylim = ylim) #known data
+    if (title) title("ÐšÐ°Ñ€Ñ‚Ð° ÐºÐ»Ð°ÑÑÐ¸Ñ„Ð¸ÐºÐ°Ñ†Ð¸Ð¸ Ð¿Ð¾ KNN")
 
     #guess
     time = Sys.time()
