@@ -2,7 +2,7 @@ source("help.R")
 source(file = "KNN.R", encoding = "UTF-8")
 
 mc.STOLP.w = function(points, classes, u, classes.from) {
-    #kwKNN
+    #KNN
     k = 6
     distances = mc.getDistances(points, u, mc.euclideanDistance)
     names(distances) = classes
@@ -20,6 +20,29 @@ mc.STOLP.margin = function(points, classes, u, class) {
     m1 = mc.STOLP.w(points, classes, u, class)
     m2 = mc.STOLP.w(points, classes, u, classes[-which(classes == class)])
     m1 - m2
+}
+
+mc.STOLP.margins = function(points, classes) {
+    n = length(classes)
+    margins = rep(0, n)
+    for (i in 1:n) margins[i] = mc.STOLP.margin(points, classes, points[i, ], classes[i])
+
+    return(margins)
+}
+
+mc.draw.STOLP.margins = function(margins) {
+    n = length(margins)
+    margins = sort(margins)
+    colors = colorRampPalette(c("red", "green"))
+
+    plot.polygonGradient(1:n, margins, colors)
+    lines(1:n, margins, lwd = 3, col = "blue")
+    lines(c(1, n), c(0, 0), col = "grey", lwd = 2)
+    title(main = "График упорядоченных по возрастанию отступов (KNN при k=6)", ylab = "Отступ (М)", xlab = "Объекты выборки")
+
+    ox = seq(0, 150, 5)
+    axis(side = 1, at = ox)
+    sapply(ox, function(x) abline(v = x, col = "grey", lty = 3))
 }
 
 mc.STOLP = function(points, classes, noise.bound, mistakes.limit) {
@@ -90,6 +113,7 @@ mc.draw.STOLP = function(points.etalones, classes.etalones, points.rest, classes
     points(points.etalones, bg = colors[classes.etalones], pch = 21)
 }
 
+#STOLP
 main = function() {
     points = iris[, 3:4]
     classes = iris[, 5]
@@ -108,4 +132,12 @@ main = function() {
     mc.draw.KNN(points.etalones, classes.etalones, c("red", "green3", "blue"), k = 6, xlim = xlim, ylim = ylim, step = 0.1, title = F)
     title(main = "Карта классификации KNN на выборке отфильтрованной STOLP")
     mc.draw.KNN(points, classes, c("red", "green3", "blue"), k = 6, xlim = xlim, ylim = ylim, step = 0.1)
+}
+
+#MARGINS
+main2 = function() {
+    points = iris[, 3:4]
+    classes = iris[, 5]
+    margins = mc.STOLP.margins(points, classes)
+    mc.draw.STOLP.margins(margins)
 }
