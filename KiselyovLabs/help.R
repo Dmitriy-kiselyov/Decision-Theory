@@ -7,24 +7,20 @@ plot.limits = function(arr, deviation = 0) {
     c(min(arr) - deviation, max(arr) + deviation)
 }
 
-plot.polygonGradient <- function(x, y, col, n = 500) {
-    # x, y: the x and y coordinates
-    # col: a vector of colours (hex, numeric, character), or a colorRampPalette
-    # n: the vertical resolution of the gradient
-    # ...: further args to plot()
+plot.functionGradient <- function(x, y, col, n = 500) {
     plot(x, y, type = "n", xlab = "", ylab = "")
     e <- par('usr')
-    height <- diff(e[3:4]) / (n - 1)
-    y_up <- seq(0, e[4], height)
-    y_down <- seq(0, e[3], - height)
-    y_all <- c(rev(y_down), y_up)
-    ncolor <- length(y_all)
-    pal <- if (!is.function(col)) colorRampPalette(col)(ncolor) else col(ncolor)
+    len = length(x)
+    pal <- if (!is.function(col)) colorRampPalette(col)(n) else col(n)
+    pal <- pal[as.numeric(cut(y, n))]
     # plot rectangles to simulate colour gradient
-    sapply(seq_len(n),
-         function(i) {
-             rect(min(x), y_all[i], max(x), y_all[i] + height, col = pal[i], border = NA)
-         })
+    x_prev = x[1]
+    for (i in 1:(len - 1)) {
+        x_next = x[i] + (x[i + 1] - x[i]) / 2
+        rect(x_prev, max(y), x_next, min(y), col = pal[i], border = NA)
+        x_prev = x_next
+    }
+    rect(x_prev, max(y), x[len], min(y), col = pal[i], border = NA)
     # plot white polygons representing the inverse of the area of interest
     polygon(c(min(x), x, max(x), rev(x)),
           c(e[4], ifelse(y > 0, y, 0),

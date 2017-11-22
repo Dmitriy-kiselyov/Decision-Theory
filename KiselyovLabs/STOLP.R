@@ -33,9 +33,9 @@ mc.STOLP.margins = function(points, classes) {
 mc.draw.STOLP.margins = function(margins) {
     n = length(margins)
     margins = sort(margins)
-    colors = colorRampPalette(c("red", "green"))
+    colors = colorRampPalette(c("darkred", "orange", "darkgreen"))
 
-    plot.polygonGradient(1:n, margins, colors)
+    plot.functionGradient(1:n, margins, colors)
     lines(1:n, margins, lwd = 3, col = "blue")
     lines(c(1, n), c(0, 0), col = "grey", lwd = 2)
     title(main = "График упорядоченных по возрастанию отступов (KNN при k=6)", ylab = "Отступ (М)", xlab = "Объекты выборки")
@@ -139,5 +139,7 @@ main2 = function() {
     points = iris[, 3:4]
     classes = iris[, 5]
     margins = mc.STOLP.margins(points, classes)
+
+    par(mfrow = c(1, 1), xpd = F)
     mc.draw.STOLP.margins(margins)
 }
