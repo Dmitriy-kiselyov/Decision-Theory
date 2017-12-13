@@ -5,6 +5,6 @@ account: dmitriypenetrator
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 248173
-bundleId: 1132325
+bundleId: 1133584
 url: https://dmitriypenetrator.shinyapps.io/plug-in/
-when: 1513168492.27962
+when: 1513205303.44629

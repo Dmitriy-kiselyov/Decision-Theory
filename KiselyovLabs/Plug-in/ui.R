@@ -43,7 +43,13 @@ ui <- fluidPage(
 
             makeRow("Отклонение X", "Mx1", "Mx2", -10, 10, 0, 10),
 
-            makeRow("Отклонение Y", "My1", "My2", -10, 10, 0)
+            makeRow("Отклонение Y", "My1", "My2", -10, 10, 0),
+
+            fluidRow(
+                column(2, h5("Итоговая ковариационнная матрица")),
+                column(5, tableOutput("covar1"), align = "center"),
+                column(5, tableOutput("covar2"), align = "center")
+            )
 
         ),
 

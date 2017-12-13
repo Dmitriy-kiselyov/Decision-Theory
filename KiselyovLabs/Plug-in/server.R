@@ -62,9 +62,20 @@ server = function(input, output) {
     estimateCoeffs = function(xy1, xy2) {
         mu1 = estimateMu(xy1)
         mu2 = estimateMu(xy2)
-        sigma1 = estimateCovarianceMatrix(xy1, mu1)
-        sigma2 = estimateCovarianceMatrix(xy2, mu2)
-        coeffs = getPlugInDiskriminantCoeffs(mu1, sigma1, mu2, sigma2)
+        covar1 = estimateCovarianceMatrix(xy1, mu1)
+        covar2 = estimateCovarianceMatrix(xy2, mu2)
+
+        #выводим итоговую матрицу
+        output$covar1 = renderTable({
+            colnames(covar1) = c(NA, NA)
+            covar1
+        }, include.colnames = FALSE)
+        output$covar2 = renderTable({
+            colnames(covar2) = c(NA, NA)
+            covar2
+        }, include.colnames = FALSE)
+
+        coeffs = getPlugInDiskriminantCoeffs(mu1, covar1, mu2, covar2)
         coeffs
     }
 
