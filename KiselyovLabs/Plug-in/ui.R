@@ -31,11 +31,11 @@ ui <- fluidPage(
 
             fluidRow(
                 column(2),
-                column(5, h2("Класс 1")),
-                column(5, h2("Класс 2"))
+                column(5, h2("Класс 1", style = "color: blue")),
+                column(5, h2("Класс 2", style = "color: green"))
             ),
 
-            makeRow("Кол-во", "n1", "n2", 5, 200, 50),
+            makeRow("Кол-во", "n1", "n2", 5, 1000, 50),
 
             makeRow("Разброс по X", "Ex1", "Ex2", 1, 10, 5),
 
