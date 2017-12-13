@@ -89,6 +89,12 @@ server = function(input, output) {
         mu2 = estimateMu(xy2)
         covar = estimateCovarianceMatrix(xy1, mu1, xy2, mu2)
 
+        #выводим итоговую матрицу
+        output$covar = renderTable({
+            colnames(covar) = c(NA, NA)
+            covar
+        }, include.colnames = FALSE)
+
         # Получаем коэффициенты ЛДФ
         invCovar <- solve(covar)
         alpha <- invCovar %*% t(mu1 - mu2)
