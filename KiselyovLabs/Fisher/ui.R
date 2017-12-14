@@ -38,7 +38,7 @@ makeJoinedRow = function(label, id, min, max, value) {
 }
 
 ui <- fluidPage(
-    titlePanel("Plug-in"),
+    titlePanel("Fisher"),
 
     sidebarLayout(
     

@@ -5,6 +5,6 @@ account: dmitriypenetrator
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 248469
-bundleId: 1133587
+bundleId: 1134714
 url: https://dmitriypenetrator.shinyapps.io/fisher/
-when: 1513205421.98859
+when: 1513259996.71208
