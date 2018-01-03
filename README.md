@@ -10,7 +10,7 @@
 
 ### Байесовские алгоритмы классификации
 
-- [ ] - линии уровня
+- [x] - [линии уровня](KiselyovLabs/readme/levels.md)
 - [x] - [подстановочный алгоритм (plug-in)](KiselyovLabs/readme/plug-in.md)
 - [x] - [линейный дискриминант Фишера](KiselyovLabs/readme/fisher.md)
 - [ ] - сеть радиальных базисных функций
