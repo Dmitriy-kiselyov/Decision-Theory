@@ -23,11 +23,23 @@ makeRow = function(label, id1, id2, min, max, value, value2 = value) {
 }
 
 ui <- fluidPage(
-    titlePanel("Adaline"),
+    titlePanel("Линейные алгоритмы"),
 
     sidebarLayout(
     
         sidebarPanel(
+
+            fluidRow(
+                column(2, h5("Алгоритм")),
+                column(10,
+                    selectInput(
+                        "algo",
+                        label = NULL,
+                        choices = list("Adaline" = "ada", "Perseptron" = "per"),
+                        selected = "ada"
+                    )
+                )
+            ),
 
             fluidRow(
                 column(2),
@@ -35,7 +47,7 @@ ui <- fluidPage(
                 column(5, h2("Класс 2", style = "color: green"))
             ),
 
-            makeRow("Кол-во", "n1", "n2", 5, 1000, 50),
+            makeRow("Кол-во", "n1", "n2", 5, 500, 50),
 
             makeRow("Разброс по X", "Ex1", "Ex2", 1, 10, 5),
 

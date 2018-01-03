@@ -5,6 +5,6 @@ account: dmitriypenetrator
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 253035
-bundleId: 1158650
+bundleId: 1160152
 url: https://dmitriypenetrator.shinyapps.io/adaline/
-when: 1514890478.92384
+when: 1514981819.14949
