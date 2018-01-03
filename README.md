@@ -19,5 +19,5 @@
 
 - [x] - [адаптивный линейный элемент (adaline)](KiselyovLabs/readme/adaline.md)
 - [x] - [персептрон Розенблатта](KiselyovLabs/readme/perseptron.md)
-- [ ] - логистическая регрессия
+- [x] - [логистическая регрессия](KiselyovLabs/readme/logit.md)
 
