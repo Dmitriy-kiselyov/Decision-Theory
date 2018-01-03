@@ -84,6 +84,9 @@ server = function(input, output) {
             Q = Q + L(margin)
         }
         Q.prev = Q
+        Q.sameCount = 0
+        Q.sameMax = 10
+
 
         repeat {
             # select the error objects
@@ -118,11 +121,17 @@ server = function(input, output) {
 
             #exit if Q is stable
             if (abs(Q.prev - Q) < 0.01) {
-                output$log = renderText({
-                    "Точный ответ не найден"
-                });
-                break;
+                Q.sameCount = Q.sameCount + 1
+                if (Q.sameCount == Q.sameMax) {
+                    output$log = renderText({
+                        "Точный ответ не найден"
+                    });
+                    break;
+                }
+            } else {
+                Q.sameCount = 0
             }
+
             Q.prev = Q
         }
 
