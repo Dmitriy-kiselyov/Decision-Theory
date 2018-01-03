@@ -26,6 +26,10 @@ linear.perceptron.L = function(m) {
     max(-m, 0)
 }
 
+linear.logit.L = function(m) {
+    log2(1 + exp(-m))
+}
+
 # Привила обновления весов
 linear.adaline.update = function(w, eta, xi, yi) {
     w - eta * (sum(w * xi) - yi) * xi
@@ -33,6 +37,14 @@ linear.adaline.update = function(w, eta, xi, yi) {
 
 linear.perceptron.update = function(w, eta, xi, yi) {
     w + eta * yi * xi
+}
+
+linear.logit.update = function(w, eta, xi, yi) {
+    sigmoid = function(z) {
+        1 / (1 + exp(-z))
+    }
+
+    w + eta * xi * yi * sigmoid(-sum(w * xi) * yi)
 }
 
 server = function(input, output) {
@@ -117,8 +129,8 @@ server = function(input, output) {
         return(w)
     }
 
-    L = list("ada" = linear.adaline.L, "per" = linear.perceptron.L)
-    update = list("ada" = linear.adaline.update, "per" = linear.perceptron.update)
+    L = list("ada" = linear.adaline.L, "per" = linear.perceptron.L, "log" = linear.logit.L)
+    update = list("ada" = linear.adaline.update, "per" = linear.perceptron.update, "log" = linear.logit.update)
 
     output$plot = renderPlot({
         #Создаем тестовые данные

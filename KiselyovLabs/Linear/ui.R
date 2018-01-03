@@ -35,7 +35,7 @@ ui <- fluidPage(
                     selectInput(
                         "algo",
                         label = NULL,
-                        choices = list("Adaline" = "ada", "Perseptron" = "per"),
+                        choices = list("Adaline" = "ada", "Perseptron" = "per", "Logit model" = "log"),
                         selected = "ada"
                     )
                 )
